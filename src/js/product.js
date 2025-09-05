@@ -1,10 +1,18 @@
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 
 const dataSource = new ProductData("tents");
 
 function addProductToCart(product) {
-  setLocalStorage("so-cart", product);
+  // setLocalStorage("so-cart", product);
+  let cart = getLocalStorage("so-cart");
+
+  if (!Array.isArray(cart)) {
+    cart = [];
+  }
+
+  cart.push(product); // add individual products
+  setLocalStorage("so-cart", cart);
 }
 // add to cart button event handler
 async function addToCartHandler(e) {

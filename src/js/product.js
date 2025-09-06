@@ -9,7 +9,7 @@ function addProductToCart(product) {
   let cart = getLocalStorage("so-cart") || [];
 
   // Find the existing item in the cart by its ID
-  const existingItem = cart.find(item => item.Id === product.Id);
+  const existingItem = cart.find((item) => item.Id === product.Id);
 
   if (existingItem) {
     // If the item exists, increment its quantity

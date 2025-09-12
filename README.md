@@ -25,3 +25,11 @@ _BYU-Pathway Worldwide improves lives through access to spiritually based, onlin
 
 
 https://shimmering-paprenjak-ce4c3a.netlify.app/
+
+# Sleep Outside Project
+
+This is the WDD 330 project for our team.
+
+## Live Site
+
+[View on Netlify](https://shimmering-paprenjak-ce4c3a.netlify.app/)

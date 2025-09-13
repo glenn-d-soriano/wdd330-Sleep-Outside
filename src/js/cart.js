@@ -8,12 +8,12 @@ function carTotal() {
     totalH3.classList.add("hide");
   } else {
     totalH3.classList.remove("hide");
-    let total = cartItems.reduce( (sum, item ) => sum + item.FinalPrice, 0);
+    let total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
     totalH3.textContent = `Total: ${total}  `;
   }
 }
 
-function renderCartContents() {  
+function renderCartContents() {
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }

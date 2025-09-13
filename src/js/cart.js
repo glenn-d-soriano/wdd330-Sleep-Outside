@@ -1,7 +1,19 @@
 import { getLocalStorage } from "./utils.mjs";
 
-function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
+const cartItems = getLocalStorage("so-cart");
+
+function carTotal() {
+  const totalH3 = document.querySelector("#cartTotal");
+  if (!cartItems || cartItems.length === 0) {
+    totalH3.classList.add("hide");
+  } else {
+    totalH3.classList.remove("hide");
+    let total = cartItems.reduce( (sum, item ) => sum + item.FinalPrice, 0);
+    totalH3.textContent = `Total: ${total}  `;
+  }
+}
+
+function renderCartContents() {  
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
@@ -26,3 +38,4 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+carTotal();

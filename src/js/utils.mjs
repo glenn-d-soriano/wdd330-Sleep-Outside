@@ -29,3 +29,11 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  // Add the logic to your function to clear out the element provided if clear is true
+  const htmlStrings = list.map(templateFn);
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}

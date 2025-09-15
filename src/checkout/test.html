@@ -1,107 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Product Cards</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
 
-        #product-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
+      #product-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
 
-        .card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
+      .card {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
 
-        .card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
+      .card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
 
-        .card h2 {
-            font-size: 1.2rem;
-            margin: 10px 0 5px 0;
-        }
+      .card h2 {
+        font-size: 1.2rem;
+        margin: 10px 0 5px 0;
+      }
 
-        .card p {
-            margin: 5px 0;
-        }
+      .card p {
+        margin: 5px 0;
+      }
 
-        .add-to-cart {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+      .add-to-cart {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
 
-        .add-to-cart:hover {
-            background: #0056b3;
-        }
+      .add-to-cart:hover {
+        background: #0056b3;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <h1>Our Products</h1>
     <div id="product-list"></div>
 
     <!-- Template -->
     <template id="product-card">
-        <section class="card">
-            <img src="" alt="">
-            <h2></h2>
-            <p></p>
-            <p></p>
-            <button class="add-to-cart">Add to Cart</button>
-        </section>
+      <section class="card">
+        <img src="" alt="" />
+        <h2></h2>
+        <p></p>
+        <p></p>
+        <button class="add-to-cart">Add to Cart</button>
+      </section>
     </template>
 
     <script>
-        const template = document.getElementById("product-card");
-        const productList = document.getElementById("product-list");
+      const template = document.getElementById("product-card");
+      const productList = document.getElementById("product-list");
 
-        const products = [
-            { name: "Tent", description: "4-person camping tent", price: "$120", image: "tent.jpg" },
-            { name: "Sleeping Bag", description: "Warm and cozy", price: "$50", image: "sleepingbag.jpg" },
-            { name: "Camping Stove", description: "Portable stove for outdoor cooking", price: "$80", image: "stove.jpg" },
-            { name: "Backpack", description: "50L waterproof hiking backpack", price: "$70", image: "backpack.jpg" }
-        ];
+      const products = [
+        {
+          name: "Tent",
+          description: "4-person camping tent",
+          price: "$120",
+          image: "tent.jpg",
+        },
+        {
+          name: "Sleeping Bag",
+          description: "Warm and cozy",
+          price: "$50",
+          image: "sleepingbag.jpg",
+        },
+        {
+          name: "Camping Stove",
+          description: "Portable stove for outdoor cooking",
+          price: "$80",
+          image: "stove.jpg",
+        },
+        {
+          name: "Backpack",
+          description: "50L waterproof hiking backpack",
+          price: "$70",
+          image: "backpack.jpg",
+        },
+      ];
 
-        products.forEach((product) => {
-            const clone = template.content.cloneNode(true);
-            const [img, title, desc, price, button] = clone.querySelectorAll("img, h2, p, p, button");
+      products.forEach((product) => {
+        const clone = template.content.cloneNode(true);
+        const [img, title, desc, price, button] = clone.querySelectorAll(
+          "img, h2, p, p, button",
+        );
 
-            title.textContent = product.name;
-            desc.textContent = product.description;
-            price.textContent = product.price;
-            img.src = product.image;
-            img.alt = product.name;
+        title.textContent = product.name;
+        desc.textContent = product.description;
+        price.textContent = product.price;
+        img.src = product.image;
+        img.alt = product.name;
 
-            // Optional: Add click event to "Add to Cart"
-            button.addEventListener('click', () => {
-                alert(`${product.name} added to cart!`);
-            });
-
-            productList.appendChild(clone);
+        // Optional: Add click event to "Add to Cart"
+        button.addEventListener("click", () => {
+          alert(`${product.name} added to cart!`);
         });
-    </script>
-</body>
 
+        productList.appendChild(clone);
+      });
+    </script>
+  </body>
 </html>

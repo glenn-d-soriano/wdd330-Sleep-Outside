@@ -1,11 +1,3 @@
-export function getParam(param) {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get(param)
-
-  return product;
-}
-
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -30,15 +22,19 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
-  // Clear the parent element if the `clear` argument is true
+// get the product id from the query string
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+  return product
+}
+
+export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false) {
+  const htmlStrings = list.map(template);
+  // if clear is true we need to clear out the contents of the parent.
   if (clear) {
-    parentElement.innerHTML = '';
+    parentElement.innerHTML = "";
   }
-
-  // Use the map() method to convert each item in the list into an HTML string
-  const htmlStrings = list.map(templateFn);
-
-  // Join the array of HTML strings and insert it into the parent element
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }

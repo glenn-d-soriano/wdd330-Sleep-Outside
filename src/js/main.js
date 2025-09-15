@@ -1,10 +1,14 @@
-// main.js
+import ProductData from "./ProductData.mjs";
+import ProductList from "./ProductList.mjs";
 
-import ProductData from './ProductData.mjs';
-import ProductList from './ProductList.mjs';
+// Get the element where products will be rendered
+const listElement = document.querySelector(".product-list");
 
-const dataSource = new ProductData('tents');
-const listElement = document.querySelector('.product-list'); 
+// Create a new instance of the data source
+const dataSource = new ProductData("tents");
 
-const productList = new ProductList('tents', dataSource, listElement);
-productList.init();
+// Create a new instance of the ProductList class
+const myProductList = new ProductList("tents", dataSource, listElement);
+
+// Initialize the product list
+myProductList.init();

@@ -1,7 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
 const cartItems = getLocalStorage("so-cart");
 
-function removeFromCart(product) {
+function removeProduct(product) {
   const updateCart = cartItems.filter(item => item.Id !== product);
   localStorage.setItem("so-cart", JSON.stringify(updateCart));
 }

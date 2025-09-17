@@ -1,7 +1,12 @@
 import { getLocalStorage } from "./utils.mjs";
+const cartItems = getLocalStorage("so-cart");
+
+function removeFromCart(product) {
+  const updateCart = cartItems.filter(item => item.Id !== product);
+  localStorage.setItem("so-cart", JSON.stringify(updateCart));
+}
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
 
   // Checks if there are items in the cart
   if (cartItems && cartItems.length > 0) {
@@ -24,6 +29,7 @@ function renderCartContents() {
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
+  <a href="" data-id="${item.Id}" class="cart-card__remove"> x </a>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -42,3 +48,10 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+
+document.querySelectorAll(".cart-card__remove").forEach( a => {
+  a.addEventListener("click", function() {
+    const id = this.getAttribute("data-id");
+    removeProduct(id);
+  });
+});

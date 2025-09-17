@@ -2,8 +2,24 @@ import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+  // Checks if there are items in the cart
+  if (cartItems && cartItems.length > 0) {
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+    // Shows the total by removing the 'hide' class
+    document.querySelector(".cart-footer").classList.remove("hide");
+
+    // Calculates the total using the reduce() method
+    const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+
+    // Updates the element with the calculated total
+    document.querySelector(".cart-total").innerHTML = `Total: $${total.toFixed(2)}`;
+  } else {
+    // If the cart is empty, displays a message
+    document.querySelector(".product-list").innerHTML = "<h2>Your cart is empty!</h2>";
+  }
 }
 
 function cartItemTemplate(item) {

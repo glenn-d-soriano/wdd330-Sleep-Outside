@@ -1,4 +1,4 @@
-import { getLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import { getLocalStorage } from "./utils.mjs";
 const cartItems = getLocalStorage("so-cart");
 
 function removeProduct(product) {
@@ -55,5 +55,3 @@ document.querySelectorAll(".cart-card__remove").forEach( a => {
     removeProduct(id);
   });
 });
-
-loadHeaderFooter();

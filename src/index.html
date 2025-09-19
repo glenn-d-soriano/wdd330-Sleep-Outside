@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Home</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="/js/main.js"></script>
   </head>
 
   <body>
@@ -29,17 +29,39 @@
         </div>
       </div>
 
-      <section class="products">
-        <h2>Top Products</h2>
-        <ul class="product-list"></ul>
-        <template>
-          <li class="product-card">
+      <section class="categories">
+        <h2>Categories</h2>
+        <article>
+            <a href="/product_listing/?category=tents">
+              <img src="/images/categories/category-tents.svg" alt="Tents Categorie" />
+              <h3 class="card_brand">Tents</h3>
+            </a>
+        </article>
+        <article>
+            <a href="/product_listing/?category=backpacks">
+              <img src="/images/categories/category-backpacks.svg" alt="Backpacks Categorie" />
+              <h3 class="card_brand">Backpacks</h3>
+            </a>
+        </article>
+          
+       <article>
+            <a href="/product_listing/?category=sleeping-bags">
+              <img src="/images/categories/category-sleepingbags.svg" alt="Sleepingbags Categorie" />
+              <h3 class="card_brand">Sleepingbags</h3>
+            </a>
+        </article>
+        <article>
+            <a href="/product_listing/?category=hammocks">
+              <img src="/images/categories/category-hammocks.svg" alt="Hammocks Categorie" />
+              <h3 class="card_brand">Hammocks</h3>
+            </a>
+        </article>
+        <!-- <template>
+          <li class="category-card">
             <img src="" alt="" />
-            <h2 class="card_brand"></h2>
-            <h3 class="card_name"></h3>
-            <p class="product-card_price"></p>
+            <h3 class="category-name"></h3>
           </li>
-        </template>
+        </template> -->
       </section>
     </main>
     <footer id="main-footer">
@@ -47,3 +69,4 @@
     </footer>
   </body>
 </html>
+/

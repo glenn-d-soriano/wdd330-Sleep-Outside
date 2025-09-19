@@ -5,10 +5,7 @@ function cartItemTemplate(item) {
     <li class="cart-card divider">
         <a href="" data-id="${item.Id}" class="cart-card__remove"> x </a>
         <a href="#" class="cart-card__image">
-            <img
-            src="${item.Image}"
-            alt="${item.Name}"
-            />
+            <img src="${item.Images.PrimaryMedium}" alt="${item.Name}" />
         </a>
         <a href="#">
             <h2 class="card__name">${item.Name}</h2>
@@ -38,36 +35,20 @@ export default class ShoppingCart {
         if (!this.cartItems || this.cartItems.length === 0) {
             this.parentElement.innerHTML = "<h2> You cart is empty! </h2>";
             document.querySelector(".cart-footer").classList.add("hide");        
-        } 
-
-        renderListWithTemplate(cartItemTemplate, this.parentElement, this.cartItems, "afterbegin", true);
+        } else {
+            renderListWithTemplate(cartItemTemplate, this.parentElement, this.cartItems, "afterbegin", true);
         
-        this.addRemoveListeners();
-        this.showTotal();
+            this.addRemoveListeners();
+            this.showTotal();
+        }        
     }
 
     showTotal() {
         const cartFooter = document.querySelector(".cart-footer");
         const cartTotal = document.querySelector(".cart-total");
-
-        if (!this.cartItems || this.cartItems.length === 0) {
-            cartTotal.classList.add("hide");
-            cartFooter.classList.add("hide");
-            this.parentElement.innerHTML = "<h2> You cart is empty! </h2>";
-        } else {
             cartFooter.classList.remove("hide");
             const total =  this.cartItems.reduce( (sum, item) => sum + item.FinalPrice, 0 );
             cartTotal.innerHTML = `Total: $ ${total.toFixed(2)}`;
-        }
-        
-
-        // if (this.cartItems && this.cartItems.length > 0) {
-        //     cartFooter.classList.remove("hide");
-        //     const total =  this.cartItems.reduce( (sum, item) => sum + item.FinalPrice, 0 );
-        //     cartTotal.innerHTML = `Total: $ ${total.toFixed(2)}`;
-        // } else {
-        //     cartFooter.classList.add("hide");
-        // }
     }
 
     addRemoveListeners() {
@@ -84,6 +65,6 @@ export default class ShoppingCart {
         let updateCart = getLocalStorage(this.key);
         updateCart = updateCart.filter( item => item.Id !== id);
         setLocalStorage(this.key, updateCart);
-        this.renderCart();
+        this.renderCart(this);
     }
 }

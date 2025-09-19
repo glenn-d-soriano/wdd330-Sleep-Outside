@@ -3,7 +3,7 @@ import { getLocalStorage, renderListWithTemplate, setLocalStorage } from "./util
 function cartItemTemplate(item) {
   const newItem = `
     <li class="cart-card divider">
-        <a href="#" data-id="${item.Id}" class="cart-card__remove"> x </a>
+        <a href="" data-id="${item.Id}" class="cart-card__remove"> x </a>
         <a href="#" class="cart-card__image">
             <img
             src="${item.Image}"
@@ -37,25 +37,37 @@ export default class ShoppingCart {
         this.cartItems = getLocalStorage(this.key);
         if (!this.cartItems || this.cartItems.length === 0) {
             this.parentElement.innerHTML = "<h2> You cart is empty! </h2>";
-        }
+            document.querySelector(".cart-footer").classList.add("hide");        
+        } 
 
         renderListWithTemplate(cartItemTemplate, this.parentElement, this.cartItems, "afterbegin", true);
-
-        this.showTotal();
+        
         this.addRemoveListeners();
+        this.showTotal();
     }
 
     showTotal() {
         const cartFooter = document.querySelector(".cart-footer");
         const cartTotal = document.querySelector(".cart-total");
 
-        if (this.cartItems && this.cartItems.length > 0) {
+        if (!this.cartItems || this.cartItems.length === 0) {
+            cartTotal.classList.add("hide");
+            cartFooter.classList.add("hide");
+            this.parentElement.innerHTML = "<h2> You cart is empty! </h2>";
+        } else {
             cartFooter.classList.remove("hide");
             const total =  this.cartItems.reduce( (sum, item) => sum + item.FinalPrice, 0 );
             cartTotal.innerHTML = `Total: $ ${total.toFixed(2)}`;
-        } else {
-            cartFooter.classList.add("hide");
         }
+        
+
+        // if (this.cartItems && this.cartItems.length > 0) {
+        //     cartFooter.classList.remove("hide");
+        //     const total =  this.cartItems.reduce( (sum, item) => sum + item.FinalPrice, 0 );
+        //     cartTotal.innerHTML = `Total: $ ${total.toFixed(2)}`;
+        // } else {
+        //     cartFooter.classList.add("hide");
+        // }
     }
 
     addRemoveListeners() {

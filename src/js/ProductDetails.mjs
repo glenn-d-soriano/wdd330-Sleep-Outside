@@ -56,7 +56,7 @@ function productDetailTemplate(product) {
         document.querySelector("h2").textContent = product.Brand.Name;
 
         const prodImg = document.querySelector("#prodImg");
-        prodImg.src = product.Image;
+        prodImg.src = product.Images.PrimaryLarge;
         prodImg.alt = product.NameWithoutBrand;
 
         document.querySelector("#prodPrice").textContent = product.FinalPrice;

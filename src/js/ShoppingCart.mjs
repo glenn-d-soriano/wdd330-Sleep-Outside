@@ -11,8 +11,8 @@ function cartItemTemplate(item) {
             <h2 class="card__name">${item.Name}</h2>
         </a>
         <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-        <p class="cart-card__quantity">qty: 1</p>
-        <p class="cart-card__price">$${item.FinalPrice}</p>
+        <p class="cart-card__quantity"> qty: ${item.quantity} </p>
+        <p class="cart-card__price">$${item.FinalPrice * item.quantity }</p>
     </li>
     `;
 
@@ -47,7 +47,7 @@ export default class ShoppingCart {
         const cartFooter = document.querySelector(".cart-footer");
         const cartTotal = document.querySelector(".cart-total");
             cartFooter.classList.remove("hide");
-            const total =  this.cartItems.reduce( (sum, item) => sum + item.FinalPrice, 0 );
+            const total =  this.cartItems.reduce( (sum, item) => sum + item.FinalPrice * item.quantity, 0 );
             cartTotal.innerHTML = `Total: $ ${total.toFixed(2)}`;
     }
 

@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, } from "./utils.mjs";
 
 export default class ProductDetails {
 
@@ -21,33 +21,23 @@ export default class ProductDetails {
           .addEventListener("click", this.addProductToCart.bind(this));
     }
 
-    addProductToCart(){
+    addProductToCart() {
 
         const cartItems = getLocalStorage("so-cart") || [];
         cartItems.push(this.product);
         setLocalStorage("so-cart", cartItems);
-        // Ensure cart is always an array
-        //   let cart = getLocalStorage("so-cart");
-        //   if (!Array.isArray(cart)) {
-        //     cart = [];
-        //   }
-        
-        //   // Check if product already exists in cart
-        //   const existingItem = cart.find((item) => item.Id === product.Id);
-        
-        //   if (existingItem) {
-        //     existingItem.Quantity = (existingItem.Quantity || 1) + 1;
-        //   } else {
-        //     product.Quantity = 1;
-        //     cart.push(this.product);
-        //   }
-        
-        //   // Save updated array back into localStorage
-        //   setLocalStorage("so-cart", cart);
+        setSuperscript();
     }
 
-    renderProductDetails(){
+    renderProductDetails() {
         productDetailTemplate(this.product);
+
+        // Check if there's a suggested retail price and a discount
+        if (this.product.SuggestedRetailPrice > this.product.FinalPrice) {
+            const discount = ((this.product.SuggestedRetailPrice - this.product.FinalPrice) / this.product.SuggestedRetailPrice) * 100;
+            const discountElement = document.querySelector("#discount");
+            discountElement.textContent = `Discount: ${Math.round(discount)}%`;
+        }
     }
 }
 

@@ -32,9 +32,12 @@ export default class ProductDetails {
     renderProductDetails() {
         productDetailTemplate(this.product);
 
-        const discount = ((this.product.ListPrice - this.product.FinalPrice) / this.product.ListPrice) * 100;
-        const discountElement = document.querySelector("#discount");
-        discountElement.textContent = `Discount: ${Math.round(discount)}%`;
+        // Check if there's a suggested retail price and a discount
+        if (this.product.SuggestedRetailPrice > this.product.FinalPrice) {
+            const discount = ((this.product.SuggestedRetailPrice - this.product.FinalPrice) / this.product.SuggestedRetailPrice) * 100;
+            const discountElement = document.querySelector("#discount");
+            discountElement.textContent = `Discount: ${Math.round(discount)}%`;
+        }
     }
 }
 

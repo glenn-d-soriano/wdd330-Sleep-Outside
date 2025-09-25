@@ -60,16 +60,16 @@
             >Securitycode: <input type="text" id="scode" name="scode" required
           /></label>
         </fieldset>
-        <fieldset class="summary">
+        <fieldset id="summary">
           <legend>&nbsp; Summary &nbsp;</legend>
           <label
-            >Subtotal: <input type="text" id="subT" name="subT" disabled
-          /></label>
+            >Subtotal: <input type="text" id="subT" name="subT" class="summary" disabled
+          /></label>          
+          <label> Tax: &nbsp; &nbsp; &nbsp; <input type="text" id="tax" class="summary" disabled> </label>
+          <label> Shipping: <input type="text" id="shipping" class="summary" disabled></label>
           <label
-            >TOTAL: <input type="text" id="oTotal" name="oTotal" disabled
+            >TOTAL: <input type="text" id="oTotal" name="oTotal"  class="summary" disabled
           /></label>
-          <p>Tax <span id="tax"></span></p>
-          <p>Shipping: <span id="shipping"> </span></p>
         </fieldset>
         <button type="button">SUBMIT</button>
       </form>

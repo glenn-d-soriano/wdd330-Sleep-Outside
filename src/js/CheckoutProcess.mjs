@@ -9,7 +9,9 @@ export default class CheckoutProcess  {
         this.tax = 0;
         this.shipping = 0;
         this.orderTotal = 0;
+        this.qttytotal = 0;
     }
+
     init() {
         this.list = getLocalStorage(this.key);
         this.calculateItemSubtotal();
@@ -21,26 +23,22 @@ export default class CheckoutProcess  {
         //  and the number of items.
         this.itemTotal =  this.list.reduce( (sum, item) => sum + item.FinalPrice * item.quantity, 0 );
 
-        document.querySelector("#subT").value = `$ ${this.itemTotal.toFixed(2)}`;
-        document.querySelector("#tax").textContent = `$ ${(this.itemTotal * 0.06).toFixed(2)}`;
+        this.qttytotal = this.list.reduce((sum, item) => sum + item.quantity, 0 );
 
-        const qttytotal = this.list.reduce((sum, item) => sum + item.quantity, 0 );
-
-        if (qttytotal === 1) {
-            this.shipping = 10;
-        } else {
-            this.shipping = 10 + (qttytotal - 1) * 2; 
-        }
-        document.querySelector("#shipping").textContent = `$ ${this.shipping.toFixed(2)}`;
-
-        document.querySelector("#oTotal").value = `$ ${(this.itemTotal + this.shipping  + this.itemTotal * 0.0).toFixed(2)}`;
+        this.calculateOrderTotal();
     }
 
     calculateOrderTotal() {
         // calculate the tax and shipping amounts. Add those to the cart total to figure out the order total
-        // this.tax = (this.itemTotal ...);
-        // this.shipping = 
-        // this.orderTotal = 
+        this.tax = (this.itemTotal * 0.06).toFixed(2);
+
+        if (this.qttytotal === 1) {
+            this.shipping = 10;
+        } else {
+            this.shipping = 10 + (this.qttytotal - 1) * 2; 
+        }
+        
+        this.orderTotal = (this.itemTotal + this.shipping  + this.itemTotal * 0.0).toFixed(2)
 
         // display totals
         this.displayOrderTotals();
@@ -48,12 +46,9 @@ export default class CheckoutProcess  {
 
     displayOrderTotals() {
         // once the totals are all calculated display them in the order summary page
-        const tax = document.querySelector(`${this.outputSelector} #tax`);
-
-        tax.innerText = `$ ${this.tax.toFixed(2)}`;
-    }
-
-    calculateItemsummary() {
-
+        document.querySelector("#subT").value = `$ ${this.itemTotal.toFixed(2)}`;
+        document.querySelector("#tax").value = `$ ${(this.itemTotal * 0.06).toFixed(2)}`;
+        document.querySelector("#shipping").value = `$ ${this.shipping.toFixed(2)}`;
+        document.querySelector("#oTotal").value = `$ ${this.orderTotal}`;
     }
 }

@@ -24,7 +24,15 @@ export default class ProductDetails {
     addProductToCart() {
 
         const cartItems = getLocalStorage("so-cart") || [];
-        cartItems.push(this.product);
+
+        const verifyItem = cartItems.find( item => item.Id === this.product.Id );
+
+        if ( verifyItem ) {
+            verifyItem.quantity = ( verifyItem.quantity || 1 ) + 1;
+        } else {
+            const itemToAdd = { ...this.product, quantity: 1 };
+            cartItems.push(itemToAdd);
+        }
         setLocalStorage("so-cart", cartItems);
         setSuperscript();
     }

@@ -8,7 +8,8 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type="module" src="../js/checkout.js"></script>
   </head>
 
   <body>
@@ -18,6 +19,34 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+      <form action="" id="formChOout" class="formChOout">
+        <fieldset>
+          <legend>  &nbsp;  Customer Name &nbsp; </legend>
+          <label for="">First Name: <input type="text" id="fstName" name="fstName" required></label>
+          <label for="">Last Name: <input type="text" id="lstName" name="lstName" required></label>
+        </fieldset>
+        <fieldset>
+          <legend> &nbsp; Address &nbsp; </legend>
+          <label for="">Street Address: <input type="text" id="street" name="street" required></label>
+          <label for="">City: <input type="text" id="City" name="City" required></label>
+          <label for="">State: <input type="text" id="State" name="State" required></label>
+          <label for="">ZIP code: <input type="text" id="zcode" name="zcode" required></label>
+        </fieldset>
+        <fieldset>
+          <legend> &nbsp; Payment &nbsp; </legend>
+          <label for="">Card Number: <input type="text" id="cnumber" name="cnumber" required></label>
+          <label for="">Expiration Date: <input type="text" id="expdate" name="expdate" required></label>
+          <label for="">Securitycode: <input type="text" id="scode" name="scode" required></label>
+        </fieldset>
+        <fieldset class="checkout-summary">
+          <legend> &nbsp; Summary &nbsp; </legend>
+          <label>Subtotal: <input type="text" id="subT" name="subT" disabled></label>
+          <label>TOTAL: <input type="text" id="oTotal" name="oTotal" disabled></label>
+          <p> Tax <span id="tax"></span></p>
+          <p> Shipping: <span id="shipping"> </span></p>
+        </fieldset>
+        <button type="button">SUBMIT</button>
+      </form>
     </main>
 
     <footer id="main-footer"></footer>

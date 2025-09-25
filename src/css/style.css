@@ -351,6 +351,28 @@ a.cart-card__remove {
   }
 }
 
+.formChOout {
+  width: 500px;
+  margin: 2rem auto;
+  padding: 8px;
+  border: solid var(--light-grey) 3px;
+  font-size: medium;
+  border-radius: 1rem;
+
+  fieldset {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 1rem;
+    
+    legend { font-weight: 600; }
+    
+    input { padding: 5px; font-size: medium; margin-bottom: 8px; border-radius: 5px; border: 1px solid;}
+  }
+
+  label { font-size: small;}
+}
+
 footer {
   font-size: var(--small-font);
   padding: 1em;

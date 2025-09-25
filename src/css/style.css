@@ -364,16 +364,30 @@ a.cart-card__remove {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 1rem;
-    
-    legend { font-weight: 600; }
-    
-    input { padding: 5px; font-size: medium; margin-bottom: 8px; border-radius: 5px; border: 1px solid;}
 
-    input:valid { background-color: rgba(23, 128, 0, 0.1);}
-    input:invalid { border: red dotted 1px;}
+    legend {
+      font-weight: 600;
+    }
+
+    input {
+      padding: 5px;
+      font-size: medium;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      border: 1px solid;
+    }
+
+    input:valid {
+      background-color: rgba(23, 128, 0, 0.1);
+    }
+    input:invalid {
+      border: red dotted 1px;
+    }
   }
 
-  label { font-size: small;}
+  label {
+    font-size: small;
+  }
 }
 
 footer {

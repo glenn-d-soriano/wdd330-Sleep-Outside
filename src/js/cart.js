@@ -5,7 +5,7 @@ const parentElement = document.querySelector(".product-list");
 const cart = new ShoppingCart("so-cart", parentElement);
 
 document.querySelector("#btnChOut").addEventListener("click", () => {
-    window.location.href = "/checkout/index.html";
+  window.location.href = "/checkout/index.html";
 });
 
 cart.init();

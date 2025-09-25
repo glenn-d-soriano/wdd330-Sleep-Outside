@@ -384,9 +384,6 @@ a.cart-card__remove {
     input:invalid {
       border: red dotted 1px;
     }
-
-    
-
     .summary { text-align: right;}
   }
 

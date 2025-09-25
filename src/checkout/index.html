@@ -19,15 +19,15 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
-      <form action="#" id="formChOout" class="formChOout">
+      <form action="" id="formChOout" class="formChOout">
         <fieldset>
           <legend>&nbsp; Customer Name &nbsp;</legend>
           <label for=""
             >First Name:
-            <input type="text" id="fstName" name="fstName" required
+            <input type="text" id="fstName" name="fname" required
           /></label>
           <label for=""
-            >Last Name: <input type="text" id="lstName" name="lstName" required
+            >Last Name: <input type="text" id="lstName" name="lname" required
           /></label>
         </fieldset>
         <fieldset>
@@ -37,27 +37,27 @@
             <input type="text" id="street" name="street" required
           /></label>
           <label for=""
-            >City: <input type="text" id="City" name="City" required
+            >City: <input type="text" id="city" name="city" required
           /></label>
           <label for=""
-            >State: <input type="text" id="State" name="State" required
+            >State: <input type="text" id="state" name="state" required
           /></label>
           <label for=""
-            >ZIP code: <input type="text" id="zcode" name="zcode" required
+            >ZIP code: <input type="text" id="zip" name="zip" required
           /></label>
         </fieldset>
         <fieldset>
           <legend>&nbsp; Payment &nbsp;</legend>
           <label for=""
             >Card Number:
-            <input type="text" id="cnumber" name="cnumber" required
+            <input type="text" id="cnumber" name="cardNumber" required  value="1234123412341234"
           /></label>
           <label for=""
             >Expiration Date:
-            <input type="text" id="expdate" name="expdate" required
+            <input type="text" id="expdate" name="expiration" required value="09/28"
           /></label>
           <label for=""
-            >Securitycode: <input type="text" id="scode" name="scode" required
+            >Securitycode: <input type="text" id="scode" name="code" required value="123"
           /></label>
         </fieldset>
         <fieldset id="summary">
@@ -65,13 +65,13 @@
           <label
             >Subtotal: <input type="text" id="subT" name="subT" class="summary" disabled
           /></label>          
-          <label> Tax: &nbsp; &nbsp; &nbsp; <input type="text" id="tax" class="summary" disabled> </label>
-          <label> Shipping: <input type="text" id="shipping" class="summary" disabled></label>
+          <label> Tax: &nbsp; &nbsp; &nbsp; <input type="text" id="tax" class="summary" name="tax" disabled> </label>
+          <label> Shipping: <input type="text" id="shipping" class="summary" name="shipping" disabled></label>
           <label
-            >TOTAL: <input type="text" id="oTotal" name="oTotal"  class="summary" disabled
+            >TOTAL: <input type="text" id="oTotal" name="orderTotal"  class="summary" disabled
           /></label>
         </fieldset>
-        <button type="button">SUBMIT</button>
+        <button type="button"  id="checkoutSubmit">SUBMIT</button>
       </form>
     </main>
 

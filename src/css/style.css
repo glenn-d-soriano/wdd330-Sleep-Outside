@@ -352,7 +352,7 @@ a.cart-card__remove {
 }
 
 .formChOout {
-  width: 500px;
+  width: 450px;
   margin: 2rem auto;
   padding: 8px;
   border: solid var(--light-grey) 3px;
@@ -375,6 +375,7 @@ a.cart-card__remove {
       margin-bottom: 8px;
       border-radius: 5px;
       border: 1px solid;
+      width: 180px;
     }
 
     input:valid {
@@ -383,6 +384,13 @@ a.cart-card__remove {
     input:invalid {
       border: red dotted 1px;
     }
+    .summary { text-align: right;}
+  }
+
+  #summary { 
+    display: flex; justify-content: space-between; background-color: rgba(128, 128, 128, 0.2);
+    legend {background-color: white; padding: 8px; border-radius: 10px;}
+    input { width: 90px; margin: 0; background-color: #fff}
   }
 
   label {

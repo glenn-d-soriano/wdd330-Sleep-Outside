@@ -1,11 +1,16 @@
 // added in w03 individual activity
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
+async function convertToJson(res) {
+  const jsonResp = await res.json();
+  if (res.ok) { // check the response to see if it is 'ok' (res.ok). 'Ok' is any status of 200, or most 300s
+    return  jsonResp; // return the response as json
   } else {
-    throw new Error("Bad Response");
+    // throw new Error("Bad Response");
+    throw { name: "servicesError", message: jsonResp};
+    //  If the status on the response is 40x or 50x then it is NOT okay. 
+    // The server sends back a 400 response if something goes wrong. 
+    // Then it puts the details in the body of the response.
   }
 }
 

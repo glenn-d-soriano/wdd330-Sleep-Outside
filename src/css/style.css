@@ -44,6 +44,14 @@ header {
   border-radius: 50%;
   padding: .15rem .25rem;
 } */
+main {
+  min-height: 70vh;
+}
+.successOrder {
+  text-align: center;
+
+  h2 { color: var(--tertiary-color);}
+}
 p {
   padding: 0.75rem;
 }
@@ -406,4 +414,24 @@ footer {
 .product-card__discount {
   color: green;
   font-weight: bold;
+}
+
+.alert {
+  position: relative;
+  border: solid 2px var(--tertiary-color);
+  background-color: var(--primary-color);
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+  border-radius: 5px;
+
+  p {  width: 100%;}
+  
+  & span {
+    position: absolute;    
+    top: 0em;
+    cursor: pointer;
+    right: 8px;
+  }
 }

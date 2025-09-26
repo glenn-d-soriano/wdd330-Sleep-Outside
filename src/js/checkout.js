@@ -12,10 +12,17 @@ document.querySelector("#zip").addEventListener("blur", checkOP.calculateOrderTo
 
 // listening for click on the button
 document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
-  if (!form.checkValidity()) {
-      e.preventDefault(); // Stop form submission
-      alert('Please fill out all required fields correctly.');
-    } else {
+  e.preventDefault(); // Stop form submission
+  const form = document.forms[0];
+  form.reportValidity();
+  
+  // if (!form.checkValidity()) {      
+  //     alert('Please fill out all required fields correctly.');
+  // } else {
+  //     checkOP.checkout();
+  // }
+  
+  if (form.checkValidity()) {      
       checkOP.checkout();
-    }  
+  }
 });

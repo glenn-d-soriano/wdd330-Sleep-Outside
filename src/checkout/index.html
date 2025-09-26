@@ -43,8 +43,11 @@
         <fieldset>
           <legend>&nbsp; Payment &nbsp;</legend>
           <label>Card Number:
-            <input type="text" id="cnumber" name="cardNumber" required  placeholder="1234123412341234"
+            <!-- https://copilot.microsoft.com/shares/mpFzk6jHDxBhgec5je5g8  pattern="^[0-9]{16}$"-->
+            <input type="text" id="cnumber" name="cardNumber" required  
+            placeholder="1234123412341234" 
           /></label>
+          <!-- https://copilot.microsoft.com/shares/hmfSLiCxoCZ1MMi9qUNFi   pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"-->
           <label>Expiration Date:
             <input type="text" id="expdate" name="expiration" required placeholder="09/28"
           /></label>

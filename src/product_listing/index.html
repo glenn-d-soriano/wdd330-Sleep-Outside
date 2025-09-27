@@ -33,13 +33,16 @@
         <h2>Top Products: <span id="category"></span></h2>
         <ul class="product-list"></ul>
 
-        <template>
-          <li class="product-card">
-            <img src="" alt="" />
-            <h2 class="card_brand"></h2>
-            <h3 class="card_name"></h3>
-            <p class="product-card_price"></p>
-          </li>
+        <template id="product-card-template">
+            <li class="product-card">
+                <div class="discount-badge"></div>
+        
+                <img src="" alt="" />
+                <h2 class="card_brand"></h2>
+                <h3 class="card_name"></h3>
+                <p class="product-card_price"></p>
+                <a href="/product_pages/product.html?product=" class="card__button">View Details</a>
+            </li>
         </template>
       </section>
     </main>

@@ -1,5 +1,5 @@
 import ExternalServices from "./ExternalServices.mjs";
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, alertMessage } from "./utils.mjs";
 
 const services = new ExternalServices();
 
@@ -32,18 +32,22 @@ export default class CheckoutProcess  {
     }
 
     calculateOrderTotal() {
-        // calculate the tax and shipping amounts. Add those to the cart total to figure out the order total
-        this.tax = (this.itemTotal * 0.06).toFixed(2);
 
+
+        // Calculate tax (as a number, and then convert to string for display later)
+        this.tax = this.itemTotal * 0.06; // Keep as a number here!
+
+        // Calculate shipping
         if (this.qttytotal === 1) {
             this.shipping = 10;
         } else {
-            this.shipping = 10 + (this.qttytotal - 1) * 2; 
+            this.shipping = 10 + (this.qttytotal - 1) * 2;
         }
-        
-        this.orderTotal = (this.itemTotal + this.shipping  + this.itemTotal * 0.0).toFixed(2)
 
-        // display totals
+        // Calculate orderTotal (Keep as a number here!)
+        this.orderTotal = this.itemTotal + this.shipping + this.tax;
+
+        // Display totals (this is where we use toFixed for presentation)
         this.displayOrderTotals();
     }
 
@@ -56,25 +60,49 @@ export default class CheckoutProcess  {
     }
 
     async checkout(form) {
-    // get the form element data by the form name
-    // convert the form data to a JSON order object using the formDataToJSON function
-    // populate the JSON order object with the order Date, orderTotal, tax, shipping, and list of items
-    // call the checkout method in the ExternalServices module and send it the JSON order data.
-        const formElement = document.forms["formChOout"];
-        const order = formDataToJSON(formElement);
+        // ... code to build the order object (order.orderDate, order.items, etc.) ...
+        // 1. Get form data and convert to JSON object
+        const order = formDataToJSON(form);
+
+        // 2. Populate the order object with calculated totals and items
+        // (Ensure calculateOrderTotal has run recently, perhaps by calling it here)
+        this.calculateOrderTotal();
 
         order.orderDate = new Date().toISOString();
+        order.items = packageItems(this.list);
         order.orderTotal = this.orderTotal;
         order.tax = this.tax;
         order.shipping = this.shipping;
-        order.items = packageItems(this.list);
-        console.log(order);
+
 
         try {
-            const response = await services.checkout(order);
-            console.log(response);
+            // This is the code that might fail and throw the custom error
+            const response = await this.externalServices.checkout(order);
+
+            // 👇 SUCCESS PATH (Handle the Happy Path - Step 5)
+            // Clear cart and redirect
+            localStorage.removeItem(this.key);
+            window.location.assign('/checkout/success.html');
+
         } catch (err) {
+            // 👇 FAILURE PATH (Handle the Unhappy Path - Stretch Goal)
+            // The 'err' object is the custom object we threw: { name: 'servicesError', message: jsonResponse }
+
+            // We expect the detailed server errors to be in err.message.errors
             console.log(err);
+
+            // Example: If the server returns specific validation errors:
+            if (err.message && err.message.errors) {
+                const errorList = Object.values(err.message.errors)
+                    .map(e => e.message)
+                    .join('<br>');
+
+                // Use the alertMessage utility (from Stretch Goal)
+                alertMessage(`There was an error with your order: <br>${errorList}`);
+            } else {
+                // General error fallback
+                alertMessage('An unknown error occurred during checkout.');
+            }
         }
     }
 }

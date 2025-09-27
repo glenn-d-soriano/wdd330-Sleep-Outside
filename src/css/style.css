@@ -407,3 +407,27 @@ footer {
   color: green;
   font-weight: bold;
 }
+
+/* src/css/style.css */
+
+.product-card {
+  position: relative;
+  /* Essential for positioning the badge */
+}
+
+.discount-badge {
+  position: absolute;
+  top: 5px;
+  /* Adjust vertical position */
+  left: 5px;
+  /* Adjust horizontal position */
+  background-color: #A03232;
+  /* Deep red background */
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-radius: 4px;
+  z-index: 10;
+  /* Ensure it is above the image/content */
+}

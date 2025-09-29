@@ -1,4 +1,4 @@
-import { getLocalStorage, renderListWithTemplate, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, renderListWithTemplate, setLocalStorage, setClick } from "./utils.mjs";
 
 function cartItemTemplate(item) {
   const newItem = `
@@ -11,8 +11,12 @@ function cartItemTemplate(item) {
             <h2 class="card__name">${item.Name}</h2>
         </a>
         <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-        <p class="cart-card__quantity">qty: 1</p>
-        <p class="cart-card__price">$${item.FinalPrice}</p>
+        <p class="cart-card__quantity"> 
+            <button class="btnMinus btnQtty" type="button" data-id="${item.Id}"> - </button>
+            <span class="card__quantity">${item.quantity}</span> 
+            <button class="btnPlus btnQtty" type="button"  data-id="${item.Id}"> + </button>
+        </p>
+        <p class="cart-card__price">$${item.FinalPrice * item.quantity }</p>
     </li>
     `;
 
@@ -38,7 +42,7 @@ export default class ShoppingCart {
         } else {
             renderListWithTemplate(cartItemTemplate, this.parentElement, this.cartItems, "afterbegin", true);
         
-            this.addRemoveListeners();
+            this.addListeners();
             this.showTotal();
         }        
     }
@@ -47,11 +51,11 @@ export default class ShoppingCart {
         const cartFooter = document.querySelector(".cart-footer");
         const cartTotal = document.querySelector(".cart-total");
             cartFooter.classList.remove("hide");
-            const total =  this.cartItems.reduce( (sum, item) => sum + item.FinalPrice, 0 );
+            const total =  this.cartItems.reduce( (sum, item) => sum + item.FinalPrice * item.quantity, 0 );
             cartTotal.innerHTML = `Total: $ ${total.toFixed(2)}`;
     }
 
-    addRemoveListeners() {
+    addListeners() {
         this.parentElement.querySelectorAll(".cart-card__remove").forEach( a => {
             a.addEventListener( "click", (e) => {
                 e.preventDefault();
@@ -59,6 +63,33 @@ export default class ShoppingCart {
                 this.removeProduct(id);
             });
         });
+
+        this.parentElement.querySelectorAll(".btnQtty").forEach( button => {
+            const id = button.getAttribute("data-id");
+            const isMinus = button.classList.contains("btnMinus");
+            const change = isMinus ? -1 : 1;
+
+            setClick(`.btnQtty[data-id="${id}"].${isMinus ? 'btnMinus': 'btnPlus'}`, () => {
+                this.updateQuantity( id, change );
+            });
+        });
+    }
+
+    updateQuantity(id, change) {
+        let cartItems = getLocalStorage(this.key);
+        const itemIndex = cartItems.findIndex(item => item.Id === id);
+
+        if (itemIndex > -1) {
+            cartItems[itemIndex].quantity += change;
+
+            if (cartItems[itemIndex].quantity <= 0) {
+                this.removeProduct(id);
+                return;
+            }
+        }
+
+        setLocalStorage(this.key, cartItems);
+        this.renderCart(); 
     }
 
     removeProduct(id) {

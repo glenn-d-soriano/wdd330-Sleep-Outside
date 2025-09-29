@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, alertMessage, } from "./utils.mjs";
 
 export default class ProductDetails {
 
@@ -21,33 +21,31 @@ export default class ProductDetails {
           .addEventListener("click", this.addProductToCart.bind(this));
     }
 
-    addProductToCart(){
+    addProductToCart() {
 
         const cartItems = getLocalStorage("so-cart") || [];
-        cartItems.push(this.product);
+
+        const verifyItem = cartItems.find( item => item.Id === this.product.Id );
+
+        if ( verifyItem ) {
+            verifyItem.quantity = ( verifyItem.quantity || 1 ) + 1;
+        } else {
+            const itemToAdd = { ...this.product, quantity: 1 };
+            cartItems.push(itemToAdd);
+        }
         setLocalStorage("so-cart", cartItems);
-        // Ensure cart is always an array
-        //   let cart = getLocalStorage("so-cart");
-        //   if (!Array.isArray(cart)) {
-        //     cart = [];
-        //   }
-        
-        //   // Check if product already exists in cart
-        //   const existingItem = cart.find((item) => item.Id === product.Id);
-        
-        //   if (existingItem) {
-        //     existingItem.Quantity = (existingItem.Quantity || 1) + 1;
-        //   } else {
-        //     product.Quantity = 1;
-        //     cart.push(this.product);
-        //   }
-        
-        //   // Save updated array back into localStorage
-        //   setLocalStorage("so-cart", cart);
+        alertMessage("Product Added to cart")
     }
 
-    renderProductDetails(){
+    renderProductDetails() {
         productDetailTemplate(this.product);
+
+        // Check if there's a suggested retail price and a discount
+        if (this.product.SuggestedRetailPrice > this.product.FinalPrice) {
+            const discount = ((this.product.SuggestedRetailPrice - this.product.FinalPrice) / this.product.SuggestedRetailPrice) * 100;
+            const discountElement = document.querySelector("#discount");
+            discountElement.textContent = `Discount: ${Math.round(discount)}%`;
+        }
     }
 }
 
